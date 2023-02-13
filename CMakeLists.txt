@@ -32,6 +32,7 @@ endif()
 
 add_executable(${PROJECT_NAME}
     src/main.cpp
+    src/soul.cpp
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE raylib raylib_cpp)
