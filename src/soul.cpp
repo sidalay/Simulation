@@ -9,8 +9,10 @@ void Soul::Tick() {
 
   if (m_deltaTime >= m_updateTime) {
     UpdatePos();
+    UpdateSpatialCollision();
     m_deltaTime = 0.f;
   }
+  UpdateSpatialColor();
 }
 
 void Soul::UpdatePos() {
@@ -45,6 +47,51 @@ void Soul::CheckOutOfBounds() {
   }
 }
 
-void Soul::Draw() {
-  DrawRectangle(m_body.x, m_body.y, m_body.width, m_body.height, m_color);
+void Soul::UpdateSpatialCollision() {
+  m_spatialCollision.width = m_body.width * 3;
+  m_spatialCollision.height = m_body.height * 3;
+  m_spatialCollision.x = m_body.x - m_spatialCollision.width/3;
+  m_spatialCollision.y = m_body.y - m_spatialCollision.height/3;
 }
+
+void Soul::Draw() {
+  DrawRectangle(
+    m_body.x, 
+    m_body.y, 
+    m_body.width, 
+    m_body.height, 
+    m_color);
+}
+
+
+// debug 
+// ------------------------------------------------------------------------ //
+void Soul::UpdateSpatialColor() {
+  if (m_spatialColor.a >= 255) {
+    decrease = true;
+  } else if  (m_spatialColor.a <= 0) {
+    decrease = false;
+  }
+
+  if (decrease) {
+    m_spatialColor.a -= 1;
+  } else {
+    m_spatialColor.a += 1;
+  }
+}
+
+void Soul::DrawSpatial() {
+  DrawRectangleLines(
+    m_spatialCollision.x, 
+    m_spatialCollision.y, 
+    m_spatialCollision.width, 
+    m_spatialCollision.height, 
+    m_spatialColor);
+  DrawRectangleLines(
+    m_body.x, 
+    m_body.y, 
+    m_body.width, 
+    m_body.height, 
+    m_spatialColor);
+}
+// ------------------------------------------------------------------------ //
