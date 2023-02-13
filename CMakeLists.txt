@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(simulation_project)
+project(simulation)
 
 find_package(raylib QUIET)
 if (NOT raylib_FOUND)
