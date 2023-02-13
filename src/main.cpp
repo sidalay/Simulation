@@ -2,6 +2,8 @@
 #include <array>
 #include "soul.hpp"
 
+#define debug
+
 int main(void)
 {
   // Initialization
@@ -40,6 +42,12 @@ int main(void)
     ClearBackground(BLACK);
     for (auto& soul:souls) {
       soul.Draw();
+
+      #ifdef debug 
+      // ---------------------- //
+        soul.DrawSpatial(); 
+      // ---------------------- //
+      #endif
     }
 
     EndDrawing();
