@@ -21,6 +21,11 @@ public:
   void Draw();
   [[nodiscard]] const Rectangle GetPos() const {return m_body;}
   [[nodiscard]] const Color GetColor() const {return m_color;}
+
+  // debug
+  // ---------------------- //
+  void DrawSpatial();
+  // ---------------------- //
 public:
   Soul(Rectangle body, 
        Color color, 
@@ -39,10 +44,23 @@ private:
 
   std::mt19937_64&                    m_rng;
   std::uniform_int_distribution<int>  m_direction{0, 3};
+
+  // debug
+  // ---------------------- //
+  Rectangle       m_spatialCollision{};
+  Color           m_spatialColor{WHITE};
+  bool decrease{};
+  // ---------------------- //
 private:
   void UpdatePos();
   void CheckOutOfBounds();
   [[nodiscard]] const bool Colliding() const;
+
+  // debug
+  // ---------------------- //
+  void UpdateSpatialCollision();
+  void UpdateSpatialColor();
+  // ---------------------- //
 };
 
 #endif // SOUL_HPP
