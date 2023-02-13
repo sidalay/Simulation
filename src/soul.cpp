@@ -1,7 +1,14 @@
 #include "soul.hpp"
 
-Soul::Soul(Rectangle body, Color color, Vector2i& window, std::mt19937_64& rng, std::bitset<8> emotion) 
-  : m_body{body}, m_color{color}, m_emotions{emotion}, m_window{window}, m_rng{rng} {
+Soul::Soul(
+  int id, 
+  Rectangle body, 
+  Color color, 
+  Vector2i& window, 
+  std::mt19937_64& rng,
+  std::array<Soul, 7>& souls, 
+  std::bitset<8> emotion) 
+  : m_body{body}, m_color{color}, m_id{id}, m_emotions{emotion}, m_window{window}, m_souls{souls}, m_rng{rng} {
 }
 
 void Soul::Tick() {
@@ -17,17 +24,22 @@ void Soul::Tick() {
 
 void Soul::UpdatePos() {
   switch (m_direction(m_rng)) {
-    case 0:
+    case 0: {
       m_body.x -= m_speed;
+      if (CheckColliding()) {m_body.x += m_speed;}
       break;
+    }
     case 1:
       m_body.x += m_speed;
+      if (CheckColliding()) {m_body.x -= m_speed;}
       break;
     case 2:
       m_body.y -= m_speed;
+      if (CheckColliding()) {m_body.y += m_speed;}
       break;
     case 3:
       m_body.y += m_speed;
+      if (CheckColliding()) {m_body.y -= m_speed;}
       break;
   }
   CheckOutOfBounds();
@@ -63,17 +75,27 @@ void Soul::Draw() {
     m_color);
 }
 
+const bool Soul::CheckColliding() const {
+  for (auto& soul:m_souls) {
+    if (m_id != soul.GetId()) {
+      if (CheckCollisionRecs(m_body, soul.GetRectangle())) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
 
 // debug 
 // ------------------------------------------------------------------------ //
 void Soul::UpdateSpatialColor() {
   if (m_spatialColor.a >= 255) {
-    decrease = true;
+    m_decrease = true;
   } else if  (m_spatialColor.a <= 0) {
-    decrease = false;
+    m_decrease = false;
   }
 
-  if (decrease) {
+  if (m_decrease) {
     m_spatialColor.a -= 1;
   } else {
     m_spatialColor.a += 1;
