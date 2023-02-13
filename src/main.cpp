@@ -1,5 +1,4 @@
 #include <iostream>
-#include <array>
 #include "soul.hpp"
 
 #define debug
@@ -18,13 +17,13 @@ int main(void)
 
   std::array<Soul, 7> souls{
     {
-      {Rectangle{290, 290, 10, 10}, GREEN, window, rand},
-      {Rectangle{370, 310, 10, 10}, BLUE, window, rand},
-      {Rectangle{480, 480, 10, 10}, RED, window, rand},
-      {Rectangle{250, 50, 10, 10}, ORANGE, window, rand},
-      {Rectangle{30, 500, 10, 10}, YELLOW, window, rand},
-      {Rectangle{100, 100, 10, 10}, PURPLE, window, rand},
-      {Rectangle{500, 150, 10, 10}, WHITE, window, rand}
+      {1, Rectangle{290, 290, 10, 10}, GREEN, window, rand, souls},
+      {2, Rectangle{370, 310, 10, 10}, BLUE, window, rand, souls},
+      {3, Rectangle{480, 480, 10, 10}, RED, window, rand, souls},
+      {4, Rectangle{250, 50, 10, 10}, ORANGE, window, rand, souls},
+      {5, Rectangle{30, 500, 10, 10}, YELLOW, window, rand, souls},
+      {6, Rectangle{100, 100, 10, 10}, PURPLE, window, rand, souls},
+      {7, Rectangle{500, 150, 10, 10}, WHITE, window, rand, souls}
     }
   };
 
