@@ -41,6 +41,8 @@ void Soul::UpdatePos() {
       m_body.y += m_speed;
       if (CheckColliding()) {m_body.y -= m_speed;}
       break;
+    case 4:
+      break;
   }
   CheckOutOfBounds();
 }

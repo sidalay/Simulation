@@ -49,7 +49,7 @@ private:
   Vector2i&                           m_window;
   std::array<Soul, 7>&                m_souls;
   std::mt19937_64&                    m_rng;
-  std::uniform_int_distribution<int>  m_direction{0, 3};
+  std::uniform_int_distribution<int>  m_direction{0, 4};
 
   // debug
   // ---------------------- //
