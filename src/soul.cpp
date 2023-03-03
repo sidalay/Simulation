@@ -8,7 +8,13 @@ Soul::Soul(
   std::mt19937_64& rng,
   std::array<Soul, 7>& souls, 
   std::bitset<8> emotion) 
-  : m_body{body}, m_color{color}, m_id{id}, m_emotions{emotion}, m_window{window}, m_souls{souls}, m_rng{rng} {
+  : m_body{body}, 
+    m_color{color}, 
+    m_id{id}, 
+    m_emotions{emotion}, 
+    m_window{window}, 
+    m_souls{souls},
+    m_rng{rng} {
 }
 
 void Soul::Tick() {
@@ -26,25 +32,37 @@ void Soul::UpdatePos() {
   switch (m_direction(m_rng)) {
     case 0: {
       m_body.x -= m_speed;
-      if (CheckColliding()) {m_body.x += m_speed;}
+      if (CheckColliding()) {
+        m_body.x += m_speed;
+      }
       break;
     }
     case 1:
       m_body.x += m_speed;
-      if (CheckColliding()) {m_body.x -= m_speed;}
+      if (CheckColliding()) {
+        m_body.x -= m_speed;
+      }
       break;
     case 2:
       m_body.y -= m_speed;
-      if (CheckColliding()) {m_body.y += m_speed;}
+      if (CheckColliding()) {
+        m_body.y += m_speed;
+      }
       break;
     case 3:
       m_body.y += m_speed;
-      if (CheckColliding()) {m_body.y -= m_speed;}
+      if (CheckColliding()) {
+        m_body.y -= m_speed;
+      }
       break;
     case 4:
       break;
   }
   CheckOutOfBounds();
+}
+
+void Soul::UpdateAffinity() {
+  
 }
 
 void Soul::CheckOutOfBounds() {
