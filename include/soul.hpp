@@ -51,8 +51,9 @@ private:
   std::mt19937_64&                    m_rng;
   std::uniform_int_distribution<int>  m_direction{0, 4};
 
-  // debug
-  // ---------------------- //
+  std::array<std::array<float,9>, 7> m_affinity{};
+
+  // ---------------------- // debug
   Rectangle       m_spatialCollision{};
   Color           m_spatialColor{WHITE};
   bool            m_decrease{};
@@ -62,8 +63,7 @@ private:
   void CheckOutOfBounds();
   [[nodiscard]] const bool CheckColliding() const;
 
-  // debug
-  // ---------------------- //
+  // ---------------------- // debug
   void UpdateSpatialCollision();
   void UpdateSpatialColor();
   // ---------------------- //

@@ -18,13 +18,13 @@ int main(void)
 
   std::array<Soul, 7> souls{
     {
-      {1, Rectangle{290, 290, 10, 10}, GREEN, world, rand, souls},
-      {2, Rectangle{370, 310, 10, 10}, BLUE, world, rand, souls},
-      {3, Rectangle{380, 380, 10, 10}, RED, world, rand, souls},
-      {4, Rectangle{250, 50, 10, 10}, ORANGE, world, rand, souls},
-      {5, Rectangle{30, 400, 10, 10}, YELLOW, world, rand, souls},
-      {6, Rectangle{100, 100, 10, 10}, PURPLE, world, rand, souls},
-      {7, Rectangle{500, 150, 10, 10}, WHITE, world, rand, souls}
+      {0, Rectangle{290, 290, 10, 10}, GREEN, world, rand, souls},
+      {1, Rectangle{370, 310, 10, 10}, BLUE, world, rand, souls},
+      {2, Rectangle{380, 380, 10, 10}, RED, world, rand, souls},
+      {3, Rectangle{250, 50, 10, 10}, ORANGE, world, rand, souls},
+      {4, Rectangle{30, 400, 10, 10}, YELLOW, world, rand, souls},
+      {5, Rectangle{100, 100, 10, 10}, PURPLE, world, rand, souls},
+      {6, Rectangle{500, 150, 10, 10}, WHITE, world, rand, souls}
     }
   };
 
