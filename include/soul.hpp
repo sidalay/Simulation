@@ -24,10 +24,9 @@ public:
   [[nodiscard]] const Color GetColor() const {return m_color;}
   [[nodiscard]] const int GetId() const {return m_id;}
 
-  // debug
-  // ---------------------- //
+  // ---------------------- // debug
   void DrawSpatial();
-  // ---------------------- //
+
 public:
   Soul(int id,
        Rectangle body, 
@@ -57,16 +56,17 @@ private:
   Rectangle       m_spatialCollision{};
   Color           m_spatialColor{WHITE};
   bool            m_decrease{};
-  // ---------------------- //
+
 private:
   void UpdatePos();
+  void UpdateAffinity();
   void CheckOutOfBounds();
   [[nodiscard]] const bool CheckColliding() const;
 
   // ---------------------- // debug
   void UpdateSpatialCollision();
   void UpdateSpatialColor();
-  // ---------------------- //
+
 };
 
 #endif // SOUL_HPP
