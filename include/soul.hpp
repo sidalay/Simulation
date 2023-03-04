@@ -51,6 +51,17 @@ private:
   std::uniform_int_distribution<int>  m_direction{0, 4};
 
   std::array<std::array<float,9>, 7> m_affinity{};
+  /*
+    Neutral
+    Friendly
+    Hostile
+    Curious
+    Englightened
+    Confused
+    Anxious
+    Frightened
+    Insanity
+  */
 
   // ---------------------- // debug
   Rectangle       m_spatialCollision{};
