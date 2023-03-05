@@ -23,6 +23,7 @@ void Soul::Tick() {
   if (m_deltaTime >= m_updateTime) {
     UpdatePos();
     UpdateSpatialCollision();
+    UpdateEmotion();
     m_deltaTime = 0.f;
   }
   UpdateSpatialColor();
@@ -59,10 +60,6 @@ void Soul::UpdatePos() {
       break;
   }
   CheckOutOfBounds();
-}
-
-void Soul::UpdateAffinity() {
-  
 }
 
 void Soul::CheckOutOfBounds() {
@@ -106,6 +103,34 @@ const bool Soul::CheckColliding() const {
   return false;
 }
 
+void Soul::UpdateEmotion() {
+  for (auto& soul:m_souls) {
+    if (m_id != soul.GetId()) {
+      UpdateAffinity(soul.GetId(), CheckCollisionRecs(m_body, soul.GetRectangle()));
+    }
+  }
+}
+
+void Soul::UpdateAffinity(int index, bool colliding) {
+  if (colliding) {
+    m_affinity[index].first += 0.01f;
+    m_emotion += 0.01f;
+  } else {
+    m_affinity[index].first -= 0.005f;
+    m_emotion -= 0.005f;
+  }
+  CheckEmotionalBounds(m_affinity[index].first);
+  CheckEmotionalBounds(m_emotion);
+}
+
+void Soul::CheckEmotionalBounds(float& emotion) {
+  if (emotion > 100.f) {
+    emotion = 100.f;
+  } else if (emotion < -100.f) {
+    emotion = -100.f;
+  }
+}
+
 // debug 
 // ------------------------------------------------------------------------ //
 void Soul::UpdateSpatialColor() {
@@ -135,5 +160,11 @@ void Soul::DrawSpatial() {
     m_body.width, 
     m_body.height, 
     m_spatialColor);
+}
+
+void Soul::ViewAffinity(int index) {
+  if (index < m_souls.size()) {
+    DrawText(TextFormat("Soul %i's emotion level:  %f", index+1, m_emotion), 20, 20, 20, RAYWHITE);
+  }
 }
 // ------------------------------------------------------------------------ //
