@@ -5,10 +5,12 @@
 #include <bitset>
 #include <random>
 #include <array>
+#include <utility>
 
 #define NEUTRAL       0b0000'0000
 #define FRIENDLY      0b0000'0001
 #define HOSTILE       0b0000'0010
+
 #define CURIOUS       0b0000'0100
 #define ENLIGHTENED   0b0000'1000
 #define CONFUSED      0b0001'0000
@@ -26,6 +28,7 @@ public:
 
   // ---------------------- // debug
   void DrawSpatial();
+  void ViewAffinity(int index);
 
 public:
   Soul(int id,
@@ -39,8 +42,10 @@ public:
 private:
   Rectangle       m_body{};
   Color           m_color{};
+  bool            m_alive{true};
   int             m_id;
   int             m_speed{10};
+  float           m_emotion{};
   float           m_deltaTime{};
   float           m_updateTime{5.f};
   std::bitset<8>  m_emotions{NEUTRAL};
@@ -50,17 +55,11 @@ private:
   std::mt19937_64&                    m_rng;
   std::uniform_int_distribution<int>  m_direction{0, 4};
 
-  std::array<std::array<float,9>, 7> m_affinity{};
+  std::array<std::pair<float, std::bitset<3>>, 7> m_affinity{};
   /*
     Neutral
     Friendly
     Hostile
-    Curious
-    Englightened
-    Confused
-    Anxious
-    Frightened
-    Insanity
   */
 
   // ---------------------- // debug
@@ -70,14 +69,15 @@ private:
 
 private:
   void UpdatePos();
-  void UpdateAffinity();
+  void UpdateEmotion();
+  void UpdateAffinity(int index, bool colliding);
   void CheckOutOfBounds();
+  void CheckEmotionalBounds(float& emotion);
   [[nodiscard]] const bool CheckColliding() const;
 
   // ---------------------- // debug
   void UpdateSpatialCollision();
   void UpdateSpatialColor();
-
 };
 
 #endif // SOUL_HPP
