@@ -28,6 +28,12 @@ int main(void)
     }
   };
 
+  #ifdef debug
+
+  int key{};
+
+  #endif
+
   // Main game loop
   while (!WindowShouldClose())
   {
@@ -45,7 +51,33 @@ int main(void)
 
       #ifdef debug 
       // ---------------------- //
-        soul.DrawSpatial(); 
+        soul.DrawSpatial();
+        switch (GetKeyPressed()) {
+          case 49:
+            key = 0;
+            break;
+          case 50:
+            key = 1;
+            break;
+          case 51:
+            key = 2;
+            break;
+          case 52:
+            key = 3;
+            break;
+          case 53:
+            key = 4;
+            break;
+          case 54:
+            key = 5;
+            break;
+          case 55:
+            key = 6;
+            break;
+          default: 
+            break;
+        }
+        soul.ViewAffinity(key); 
       // ---------------------- //
       #endif
     }
